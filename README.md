@@ -27,3 +27,4 @@ it build without using any frameworks as they requested
 ## TODO
 * improve the UI 
 * create a REST api
+* host and publish a demo webbsite 
