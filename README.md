@@ -9,7 +9,7 @@ it build without using any frameworks as they requested
   * routes
 * Users 
   * welcome mail
-  *unique username and email validation
+  * unique username and email validation
   * md5 password encription {without salt as its not meant for production}
 * sessions [for the user login]
 * cookies [for the shopping cart]
