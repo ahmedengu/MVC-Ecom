@@ -1,6 +1,6 @@
 # MVC-Ecom
 a simple Ecommerce script for ICC.Canada internship 
-it build without using any frameworks as they requested
+it built without using any frameworks as they requested
 ## features
 * MVC
   * controllers
