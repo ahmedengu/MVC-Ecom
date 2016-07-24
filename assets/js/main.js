@@ -1,6 +1,18 @@
+function updaateOrdersCount() {
+    var cart = getCookie("cart");
+    if (cart.length == 0)
+        document.getElementById('numOfOrders').innerHTML = 0;
+    else {
+        document.getElementById('numOfOrders').innerHTML = cart.split(',').length;
+
+    }
+}
+
 function addToCart(id) {
     var cart = getCookie("cart");
     document.cookie = "cart=" + id + ((cart.length != 0) ? "," + cart : "");
+    updaateOrdersCount();
+
 }
 
 function removeFromCart(id) {

@@ -18,12 +18,11 @@ class main
          
 
     </head>
-    <body>
+    <body onload='updaateOrdersCount();'>
         <header>
             <div>
-               <a href=\"/\"> <img src=\"" . SITE_LOGO . "\" class=\"logo\" id=\"logo\" alt='" . SITE_NAME . "' /></a>
-                <hr />
-                <nav>
+                <nav>       
+                    <a href=\"/\"> <img src=\"" . SITE_LOGO . "\" class=\"logo\" id=\"logo\" alt='" . SITE_NAME . "' /></a>
                     <ul>
                         <li>
                             <a href=\"/\">Home </a>
@@ -32,7 +31,7 @@ class main
                             <a href=\"" . R_MY_ORDERS . "\">my orders </a>
                         </li>
                         <li>
-                            <a href=\"" . R_ADD_ORDER . "\">add order </a>
+                            <a href=\"" . R_ADD_ORDER . "\">cart (<span id='numOfOrders'>0</span>) </a>
                         </li>
                         
                         " . ((isset($_SESSION['user_id'])) ? "
@@ -54,8 +53,7 @@ class main
     public static function echo_footer()
     {
         echo "<footer>
-            <hr style=\"\">
-            <p>" . SITE_COPYRIGHTS . "</p>
+            <div>" . SITE_COPYRIGHTS . "</div>
         </footer>
     </body>
 </html>";
@@ -76,8 +74,7 @@ class main
                             <strong>$product[1]</strong>
                         </a>
                         <p>$product[3]</p>
-                        <p class='price'>$product[4]</p>
-                        <button onclick=\"addToCart('$product[0]')\">add to cart</button>
+                        <button onclick=\"addToCart('$product[0]')\">add ($product[4])</button>
                     </div>
                     ";
         }
@@ -106,8 +103,7 @@ class main
                             <strong>$product[1]</strong>
                         </a>
                         <p>$product[3]</p>
-                        <p class='price'>$product[4]</p>
-                        <button onclick=\"removeFromCart('$product[0]')\">remove</button>
+                        <button onclick=\"removeFromCart('$product[0]')\">remove ($product[4])</button>
                     </div>
                     ";
         }
@@ -118,10 +114,9 @@ class main
             $total += $product[4];
         }
         echo "<div id='order'><form method='post'>
-                        <input type='text' value='" . $_SESSION['user_id'] . "' name='user' hidden>
                                             <input type='text' value='" . $_COOKIE['cart'] . "' name='products' hidden>
-                                          <label>total  <input type='text' value='" . $total . "' name='total' disabled></label>
-    <input type='submit' value='order'>
+                                           <input type='text' value='" . $total . "' name='total' hidden>
+    <input type='submit' value='total ($total)'>
     </form></div>
     ";
         echo "</main>";
@@ -132,7 +127,7 @@ class main
     public static function message_render($title, $description, $keywords, $message)
     {
         main::echo_header($title, $description, $keywords);
-        echo "<main><div id=\"content\"><strong>$message</strong</div></main>";
+        echo "<main><div id=\"content\"><strong class='myMessage'>$message</strong></div></main>";
         main::echo_footer();
     }
 
@@ -140,7 +135,7 @@ class main
     {
         main::echo_header("Login", "Login", "Login");
         echo "<main><div id=\"content\">
-<form method='post'>
+<form method='post' class='wideForm'>
 <input type='text' name='username' placeholder='username'>
 <input type='password' name='password' placeholder='password'>
 <input type='submit' value='login' >
@@ -154,7 +149,7 @@ class main
     {
         main::echo_header("register", "register", "register");
         echo "<main><div id=\"content\">
-<form method='post'>
+<form method='post' class='wideForm'>
 <input type='email' name='email' placeholder='email'>
 <input type='text' name='username' placeholder='username'>
 <input type='password' name='password' placeholder='password'>
@@ -176,8 +171,7 @@ class main
                             <strong>$product[1]</strong>
                         </a>
                         <p>$product[3]</p>
-                        <p class='price'>$product[4]</p>
-                        <button onclick=\"addToCart('$product[0]')\">add to cart</button>
+                        <button onclick=\"addToCart('$product[0]')\">$product[4]</button>
                     </div>
 </div></main>";
 
@@ -192,11 +186,11 @@ class main
         main::echo_header("my orders", "my orders", "my orders");
         echo "<main><div id=\"content\">";
         foreach ($orders as $order) {
-            echo "<div>
-<a href='" . R_ORDER . "$order[0]'>$order[0]</a>
+            echo "<div class='col myOrders'>
 <p>products: $order[3]</p>
 <p>time: $order[1]</p>
 <p>total: $order[4]</p>
+<a href='" . R_ORDER . "$order[0]'>#$order[0]</a>
 
 </div>
 ";
@@ -212,8 +206,9 @@ class main
     {
         main::echo_header("my orders", "my orders", "my orders");
         echo "<main><div id=\"content\">";
-        echo "<div>
-<a href='" . R_ORDER . "$order[0]'>$order[0]</a>
+        echo "<div class='productPage myOrders'>
+<a href='" . R_ORDER . "$order[0]'>#$order[0]</a>
+
 <p>products: $order[3]</p>
 <p>time: $order[1]</p>
 <p>total: $order[4]</p>

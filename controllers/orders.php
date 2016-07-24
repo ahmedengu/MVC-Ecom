@@ -19,25 +19,30 @@ class orders
     public function add()
     {
         if (count($_REQUEST) >= 1) {
-            if ($this->addOrder()) {
-                setcookie("cart", "");
-                header("Location: https://www.paypal.com/"); //TODO: paypal
-
-            } else {
-                main::message_render("something went wrong", "something went wrong", "something went wrong", "something went wrong");
-            }
-        } else {
             if (isset($_SESSION['user_id'])) {
-                if (isset($_COOKIE['cart']) && strlen($_COOKIE['cart']) > 0) {
-                    $products = product::getAllByID(explode(",", $_COOKIE['cart']));
 
-                    main::placeOrder_render("order", "order", "order", $products);
+                if ($this->addOrder()) {
+                    setcookie("cart", "");
+                    header("Location: https://www.paypal.com/"); //TODO: paypal
+
                 } else {
-                    main::message_render("your cart is empty", "your cart is empty", "your cart is empty", "your cart is empty");
+                    main::message_render("something went wrong", "something went wrong", "something went wrong", "something went wrong");
                 }
+
             } else {
                 header("Location: " . R_LOGIN);
             }
+        } else {
+            if (isset($_COOKIE['cart']) && strlen($_COOKIE['cart']) > 0) {
+                $products = product::getAllByID(explode(",", $_COOKIE['cart']));
+
+                main::placeOrder_render("order", "order", "order", $products);
+
+
+            } else {
+                main::message_render("your cart is empty", "your cart is empty", "your cart is empty", "your cart is empty");
+            }
+
         }
     }
 
@@ -56,9 +61,14 @@ class orders
 
     public function myOrders()
     {
-        if (isset($_SESSION['user_id']))
-            main::myOrders_render((order::getMyOrders($_SESSION['user_id'])));
-        else
+        if (isset($_SESSION['user_id'])) {
+            $orders = order::getMyOrders($_SESSION['user_id']);
+            if ($orders != null)
+                main::myOrders_render($orders);
+            else
+                main::message_render("you have no orders", "you have no orders", "you have no orders", "you have no orders");
+
+        } else
             header("Location: " . R_LOGIN);
     }
 
