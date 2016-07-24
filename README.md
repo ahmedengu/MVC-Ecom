@@ -25,6 +25,5 @@ it built without using any frameworks as they requested
 * go to example.com/install.php 
 
 ## TODO
-* improve the UI 
 * create a REST api
 * host and publish a demo webbsite 
