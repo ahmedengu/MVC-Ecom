@@ -34,7 +34,7 @@ class product
     {
         db::dataFilter($name, $image, $desc, $price);
 
-        return (new db())->conn->query("INSERT INTO `icc`.`product` ( `id` , `name` , `image` , `desc` , `price` ) VALUES ( NULL , '$name', '$image', '$desc', '$price' )");
+        return (new db())->conn->query("INSERT INTO `product` ( `id` , `name` , `image` , `desc` , `price` ) VALUES ( NULL , '$name', '$image', '$desc', '$price' )");
 
     }
 
