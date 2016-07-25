@@ -1,6 +1,7 @@
 # MVC-Ecom
 a simple Ecommerce script for ICC.Canada internship 
 it built without using any frameworks as they requested
+Demo : http://nsg36268.tigrimigri.com/
 ## features
 * MVC
   * controllers
@@ -26,4 +27,3 @@ it built without using any frameworks as they requested
 
 ## TODO
 * create a REST api
-* host and publish a demo webbsite 
