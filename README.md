@@ -21,6 +21,8 @@ Demo : http://nsg36268.tigrimigri.com/
   * validate the orders befor submiting then redirect to paypal to do the transactios
   * can display user orders
 
+### requirements
+php 5.6 or higher
 ## how to use
 * edit config.php
 * go to example.com/install.php 
