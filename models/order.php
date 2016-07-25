@@ -41,7 +41,7 @@ class order
     public static function add($user, $products, $total)
     {
         db::dataFilter($user, $products, $total);
-        return (new db())->conn->query("INSERT INTO `icc`.`order` (`id`, `timestamp`, `user`, `products`, `total`) VALUES (NULL, CURRENT_TIMESTAMP, '$user', '$products', '$total')");
+        return (new db())->conn->query("INSERT INTO `order` (`id`, `timestamp`, `user`, `products`, `total`) VALUES (NULL, CURRENT_TIMESTAMP, '$user', '$products', '$total')");
 
     }
 
