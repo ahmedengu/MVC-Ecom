@@ -25,7 +25,9 @@ Demo : http://nsg36268.tigrimigri.com/
 php 5.6 or higher
 ## how to use
 * edit config.php
-* go to example.com/install.php 
+* go to example.com/install.php (or import icc.sql) 
 
 ## TODO
 * create a REST api
+* admin dashboard
+* installition wizard 
